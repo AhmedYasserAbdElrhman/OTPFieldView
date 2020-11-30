@@ -76,6 +76,7 @@ import UIKit
     public var filledBorderColor: UIColor = UIColor.clear
     public var errorBorderColor: UIColor?
     public var fieldTextColor: UIColor = UIColor.black
+    public var shouldAssignFirstResponder: Bool = true
     
     public weak var delegate: OTPFieldViewDelegate?
     
@@ -94,7 +95,10 @@ import UIKit
         layoutIfNeeded()
         
         // Forcefully try to make first otp field as first responder
-        (viewWithTag(1) as? OTPTextField)?.becomeFirstResponder()
+        // Fix first responder bug
+        if shouldAssignFirstResponder {
+            (viewWithTag(1) as? OTPTextField)?.becomeFirstResponder()
+        }
     }
     
     fileprivate func initializeOTPFields() {
