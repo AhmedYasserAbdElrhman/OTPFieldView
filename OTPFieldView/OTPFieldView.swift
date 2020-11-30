@@ -48,6 +48,7 @@ import UIKit
 /// Different input type for OTP fields.
 @objc public enum KeyboardType: Int {
     case numeric
+    case asciNumeric
     case alphabet
     case alphaNumeric
 }
@@ -74,6 +75,7 @@ import UIKit
     public var defaultBorderColor: UIColor = UIColor.gray
     public var filledBorderColor: UIColor = UIColor.clear
     public var errorBorderColor: UIColor?
+    public var fieldTextColor: UIColor = UIColor.black
     
     public weak var delegate: OTPFieldViewDelegate?
     
@@ -128,11 +130,14 @@ import UIKit
         otpField.delegate = self
         otpField.tag = index + 1
         otpField.font = fieldFont
+        otpField.textColor = fieldTextColor
         
         // Set input type for OTP fields
         switch otpInputType {
         case .numeric:
             otpField.keyboardType = .numberPad
+        case .asciNumeric:
+            otpField.keyboardType = .asciiCapableNumberPad
         case .alphabet:
             otpField.keyboardType = .alphabet
         case .alphaNumeric:
